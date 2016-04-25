@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/htaiwan/socketjs/issues"
   },
-  "homepage": "https://github.com/htaiwan/socketjs#readme"
+  "homepage": "https://github.com/htaiwan/socketjs#readme",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
 }
