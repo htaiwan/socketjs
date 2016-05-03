@@ -12,7 +12,11 @@ io.on('connection', function (socket) {
 	socket.on('message', function (message) {
 		console.log('收到訊息: ' + message.text);
 
-		socket.broadcast.emit('message', message);
+		// server會將訊息傳送給每個人
+		io.emit('message', message); 
+
+		// server會將訊息傳給除了自己以外的每個人
+		// socket.broadcast.emit('message', message); 
 	});
 
 	socket.emit('message', {
