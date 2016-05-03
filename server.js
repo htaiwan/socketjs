@@ -3,6 +3,7 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var moment = require('moment');
 
 app.use(express.static(__dirname + '/public'));
 
@@ -12,6 +13,8 @@ io.on('connection', function (socket) {
 	socket.on('message', function (message) {
 		console.log('收到訊息: ' + message.text);
 
+		message.timestamp = moment().valueOf();
+
 		// server會將訊息傳送給每個人
 		io.emit('message', message); 
 
@@ -19,8 +22,10 @@ io.on('connection', function (socket) {
 		// socket.broadcast.emit('message', message); 
 	});
 
+	// system message
 	socket.emit('message', {
-		text: '歡迎光臨聊天室'
+		text: '歡迎光臨聊天室',
+		timestamp: moment().valueOf()
 	});
 });
 
